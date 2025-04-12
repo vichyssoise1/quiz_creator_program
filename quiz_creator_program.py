@@ -2,14 +2,18 @@
 # quiz_creator.py
 
 import json
-from colorama import init, Fore, Style
+from colorama import init, Fore
+from pyfiglet import figlet_format
 
 def main():
     init(autoreset=True)
-    filename = "questions.txt"
-    print(Fore.MAGENTA + f"Questions will be saved to {filename}\n")
 
-    with open(filename, "a", encoding="utf-8") as f:
+    # Cool ASCII banner
+    banner = figlet_format("Quiz Creator", font="slant")
+    print(Fore.CYAN + banner)
+    print(Fore.MAGENTA + "Your questions will be saved to questions.txt\n")
+
+    with open("questions.txt", "a", encoding="utf-8") as f:
         while True:
             print(Fore.YELLOW + "Enter your question (or type 'exit'):")
             question = input("> ").strip()
