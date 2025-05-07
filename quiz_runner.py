@@ -2,6 +2,7 @@
 # quiz_runner.py
 
 import json
+import random
 
 def load_questions(filename="questions.txt"):
     questions = []
@@ -15,8 +16,21 @@ def load_questions(filename="questions.txt"):
 
 def main():
     questions = load_questions()
-    print(f"Loaded {len(questions)} questions.")
-    # More to come...
+    if not questions:
+        print("❌ No questions found.")
+        return
+
+    question = random.choice(questions)
+    print("\n🧠 " + question["question"])
+    for key, value in question["options"].items():
+        print(f"  {key}) {value}")
+    
+    answer = input("Your answer (a/b/c/d): ").strip().lower()
+    if answer == question["answer"]:
+        print("✅ Correct!")
+    else:
+        correct_answer = question["options"][question["answer"]]
+        print(f"❌ Wrong. Correct answer: {question['answer']}) {correct_answer}")
 
 if __name__ == "__main__":
     main()
