@@ -22,17 +22,31 @@ def main():
         print(Fore.RED + "❌ No questions found.")
         return
 
-    question = random.choice(questions)
-    print(Fore.CYAN + "\n🧠 " + question["question"])
-    for key, value in question["options"].items():
-        print(Fore.YELLOW + f"  {key}) {value}")
-    
-    answer = input(Fore.MAGENTA + "Your answer (a/b/c/d): ").strip().lower()
-    if answer == question["answer"]:
-        print(Fore.GREEN + "✅ Correct!")
-    else:
-        correct_answer = question["options"][question["answer"]]
-        print(Fore.RED + f"❌ Wrong. Correct answer: {question['answer']}) {correct_answer}")
+    used = set()
+    while True:
+        if len(used) == len(questions):
+            print(Fore.CYAN + "\n🎉 You've answered all questions!")
+            break
+
+        question = random.choice(questions)
+        while id(question) in used:
+            question = random.choice(questions)
+        used.add(id(question))
+
+        print(Fore.CYAN + "\n🧠 " + question["question"])
+        for key, value in question["options"].items():
+            print(Fore.YELLOW + f"  {key}) {value}")
+        
+        answer = input(Fore.MAGENTA + "Your answer (a/b/c/d) or 'exit' to quit: ").strip().lower()
+        if answer == "exit":
+            print(Fore.CYAN + "\n👋 Goodbye!")
+            break
+
+        if answer == question["answer"]:
+            print(Fore.GREEN + "✅ Correct!")
+        else:
+            correct_answer = question["options"][question["answer"]]
+            print(Fore.RED + f"❌ Wrong. Correct answer: {question['answer']}) {correct_answer}")
 
 if __name__ == "__main__":
     main()
