@@ -4,6 +4,7 @@
 import json
 import random
 from colorama import init, Fore, Style
+from pyfiglet import figlet_format
 
 def load_questions(filename="questions.txt"):
     questions = []
@@ -17,10 +18,15 @@ def load_questions(filename="questions.txt"):
 
 def main():
     init(autoreset=True)
+
+    banner = figlet_format("Quiz Time!", font="slant")
+    print(Fore.BLUE + banner)
+
     questions = load_questions()
     if not questions:
         print(Fore.RED + "❌ No questions found.")
         return
+
 
     used = set()
     while True:
