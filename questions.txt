@@ -1,2 +1,6 @@
-{"question": "Masaya ba ako?", "options": {"a": "Yes", "b": "No", "c": "Maybe", "d": "None of the Above"}, "answer": "b"}
+{"question": "Masaya ka ba?", "options": {"a": "Yes", "b": "No", "c": "Maybe", "d": "None of the Above"}, "answer": "b"}
 {"question": "Masaya ba siya", "options": {"a": "Yes", "b": "No", "c": "Maybe", "d": "None of the Above"}, "answer": "a"}
+{"question": "Is 1 + 1 = 2", "options": {"a": "Yes", "b": "No, its 3", "c": "maybe", "d": "No, its 4"}, "answer": "a"}
+{"question": "Papasa ba ako ngayong exams", "options": {"a": "Yes", "b": "No", "c": "Very Unlikely", "d": "Wag ka na umasa"}, "answer": "d"}
+{"question": "Babalikan niya ba ako?", "options": {"a": "OO", "b": "HINDI", "c": "MALABO MANGYARE", "d": "WAG KA MAWALAN NG PAGASA"}, "answer": "b"}
+{"question": "Masaya ka na ba sa iba?", "options": {"a": "Hindi", "b": "Hindi", "c": "Hindi", "d": "Hindi Talaga"}, "answer": "d"}
