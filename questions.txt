@@ -1,0 +1,2 @@
+{"question": "Masaya ba ako?", "options": {"a": "Yes", "b": "No", "c": "Maybe", "d": "None of the Above"}, "answer": "b"}
+{"question": "Masaya ba siya", "options": {"a": "Yes", "b": "No", "c": "Maybe", "d": "None of the Above"}, "answer": "a"}
