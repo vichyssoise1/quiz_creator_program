@@ -30,6 +30,9 @@ def main():
         return
 
     used = set()
+    total_questions = 0
+    correct_answers = 0
+
     while True:
         if len(used) == len(questions):
             print(Fore.CYAN + "\n🎉 You've answered all available questions!")
@@ -53,13 +56,28 @@ def main():
         if answer == "exit":
             print(Fore.CYAN + "\n👋 Goodbye!")
             break
-        elif answer is None:
+
+        total_questions += 1
+
+        if answer is None:
             print(Fore.RED + f"❌ No answer given. Correct answer: {question['answer']}) {question['options'][question['answer']]}")
         elif answer == question["answer"]:
+            correct_answers += 1
             print(Fore.GREEN + "✅ Correct!")
         else:
-            correct_answer = question["options"][question["answer"]]
-            print(Fore.RED + f"❌ Wrong. Correct answer: {question['answer']}) {correct_answer}")
+            correct = question["options"][question["answer"]]
+            print(Fore.RED + f"❌ Wrong. Correct answer: {question['answer']}) {correct}")
+
+    # Show final score
+    print(Fore.MAGENTA + "\n📊 Quiz Summary")
+    print(Fore.MAGENTA + f"You answered {correct_answers} out of {total_questions} questions correctly.")
+
+    if correct_answers == total_questions and total_questions > 0:
+        print(Fore.GREEN + "🔥 Perfect score! You're a quiz master!")
+    elif correct_answers >= total_questions // 2:
+        print(Fore.YELLOW + "💪 Nice job! You did well.")
+    else:
+        print(Fore.RED + "📚 Keep practicing! You’ll get better.")
 
 if __name__ == "__main__":
     main()
