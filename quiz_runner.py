@@ -3,8 +3,9 @@
 
 import json
 import random
-from colorama import init, Fore, Style
+from colorama import init, Fore
 from pyfiglet import figlet_format
+from inputimeout import inputimeout, TimeoutOccurred
 
 def load_questions(filename="questions.txt"):
     questions = []
@@ -21,17 +22,17 @@ def main():
 
     banner = figlet_format("Quiz Time!", font="slant")
     print(Fore.BLUE + banner)
+    print(Fore.MAGENTA + "Type 'exit' anytime to quit.\n")
 
     questions = load_questions()
     if not questions:
         print(Fore.RED + "❌ No questions found.")
         return
 
-
     used = set()
     while True:
         if len(used) == len(questions):
-            print(Fore.CYAN + "\n🎉 You've answered all questions!")
+            print(Fore.CYAN + "\n🎉 You've answered all available questions!")
             break
 
         question = random.choice(questions)
@@ -43,12 +44,18 @@ def main():
         for key, value in question["options"].items():
             print(Fore.YELLOW + f"  {key}) {value}")
         
-        answer = input(Fore.MAGENTA + "Your answer (a/b/c/d) or 'exit' to quit: ").strip().lower()
+        try:
+            answer = inputimeout(prompt=Fore.MAGENTA + "⏱️ Your answer (10s): ", timeout=10).strip().lower()
+        except TimeoutOccurred:
+            answer = None
+            print(Fore.RED + "\n⏰ Time's up!")
+
         if answer == "exit":
             print(Fore.CYAN + "\n👋 Goodbye!")
             break
-
-        if answer == question["answer"]:
+        elif answer is None:
+            print(Fore.RED + f"❌ No answer given. Correct answer: {question['answer']}) {question['options'][question['answer']]}")
+        elif answer == question["answer"]:
             print(Fore.GREEN + "✅ Correct!")
         else:
             correct_answer = question["options"][question["answer"]]
